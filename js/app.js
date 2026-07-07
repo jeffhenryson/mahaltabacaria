@@ -8,7 +8,7 @@
 /* --------------------------------------------------------------------------
    CONFIGURAÇÃO — edite aqui o número do WhatsApp (padrão Meta: DDI+DDD+número)
    -------------------------------------------------------------------------- */
-const WHATSAPP_NUMBER = '5511999999999';
+const WHATSAPP_NUMBER = '5583996697177';
 
 /* --------------------------------------------------------------------------
    ARTES DOS PRODUTOS (SVG inline, geometria limpa na paleta Mahal)
@@ -97,18 +97,30 @@ const CATEGORIES = [
 ];
 
 const PRODUCTS = [
-  { id: 1,  name: 'Pod Descartável Ignite V50 (Menthol)',          price: 89.90,  category: 'vaporizadores', art: 'pod',        tint: '#EAD9CF', a: '#662626', b: '#825B3E' },
-  { id: 2,  name: 'Seda Smoking Deluxe King Size (C/ Piteira)',    price: 12.00,  category: 'sedas',         art: 'seda',       tint: '#F0DFC8', a: '#825B3E', b: '#662626' },
-  { id: 3,  name: 'Essência Nay Vision 50g',                       price: 14.50,  category: 'essencias',     art: 'essencia',   tint: '#EBD8D0', a: '#662626', b: '#825B3E' },
-  { id: 4,  name: 'Dichavador de Metal Premium Mahal Pro',         price: 55.00,  category: 'acessorios',    art: 'dichavador', tint: '#E9DECE', a: '#825B3E', b: '#5D5B4C' },
-  { id: 5,  name: 'Isqueiro Clipper Recarregável Colecionável',    price: 16.00,  category: 'acessorios',    art: 'isqueiro',   tint: '#F0DCC6', a: '#662626', b: '#825B3E' },
-  { id: 6,  name: 'Carvão de Coco para Narguilé Hexagonal 1kg',    price: 34.00,  category: 'acessorios',    art: 'carvao',     tint: '#E7DAD2', a: '#5D5B4C', b: '#825B3E' },
-  { id: 7,  name: 'Essência Adalya Love 66 50g',                   price: 15.90,  category: 'essencias',     art: 'essencia',   tint: '#F0DCC6', a: '#825B3E', b: '#662626' },
-  { id: 8,  name: 'Essência Zomo Strong Mint 50g',                 price: 13.90,  category: 'essencias',     art: 'essencia',   tint: '#E4DFD0', a: '#5D5B4C', b: '#825B3E' },
-  { id: 9,  name: 'Seda OCB Organic Slim King Size',               price: 9.50,   category: 'sedas',         art: 'seda',       tint: '#EBD8D0', a: '#662626', b: '#5D5B4C' },
-  { id: 10, name: 'Pod Descartável Oxbar G8000 (Grape Ice)',       price: 119.90, category: 'vaporizadores', art: 'pod',        tint: '#E9DECE', a: '#825B3E', b: '#662626' },
-  { id: 11, name: 'Piteira de Vidro Mahal Glass Cristal',          price: 25.00,  category: 'acessorios',    art: 'piteira',    tint: '#EAD9CF', a: '#825B3E', b: '#662626' },
-  { id: 12, name: 'Seda Bem Bolado Celulose Transparente',         price: 10.00,  category: 'sedas',         art: 'seda',       tint: '#E4DFD0', a: '#5D5B4C', b: '#662626' },
+  { id: 1,  name: 'Pod Descartável Ignite V50 (Menthol)',          price: 89.90,  category: 'vaporizadores', art: 'pod',        tint: '#EAD9CF', a: '#662626', b: '#825B3E',
+    desc: 'Vape descartável com até 5000 puffs e sabor menthol gelado. Bateria de longa duração, compacto e pronto para usar direto da embalagem.' },
+  { id: 2,  name: 'Seda Smoking Deluxe King Size (C/ Piteira)',    price: 12.00,  category: 'sedas',         art: 'seda',       tint: '#F0DFC8', a: '#825B3E', b: '#662626',
+    desc: 'Seda King Size ultrafina de origem espanhola, com queima lenta e uniforme. Acompanha piteiras de papel para um acabamento perfeito.' },
+  { id: 3,  name: 'Essência Nay Vision 50g',                       price: 14.50,  category: 'essencias',     art: 'essencia',   tint: '#EBD8D0', a: '#662626', b: '#825B3E',
+    desc: 'Essência premium de melaço suave e fumaça densa. Sabor marcante e duradouro, ideal para longas sessões de narguilé.' },
+  { id: 4,  name: 'Dichavador de Metal Premium Mahal Pro',         price: 55.00,  category: 'acessorios',    art: 'dichavador', tint: '#E9DECE', a: '#825B3E', b: '#5D5B4C',
+    desc: 'Dichavador de liga metálica com quatro câmaras, dentes afiados e coletor de pólen. Acabamento resistente da linha exclusiva Mahal.' },
+  { id: 5,  name: 'Isqueiro Clipper Recarregável Colecionável',    price: 16.00,  category: 'acessorios',    art: 'isqueiro',   tint: '#F0DCC6', a: '#662626', b: '#825B3E',
+    desc: 'Isqueiro Clipper original recarregável, com pedra removível que também funciona como socador. Edição colecionável e durável.' },
+  { id: 6,  name: 'Carvão de Coco para Narguilé Hexagonal 1kg',    price: 34.00,  category: 'acessorios',    art: 'carvao',     tint: '#E7DAD2', a: '#5D5B4C', b: '#825B3E',
+    desc: 'Carvão de coco 100% natural no formato hexagonal. Acende rápido, não solta faísca e mantém a brasa estável por mais tempo. Pacote de 1kg.' },
+  { id: 7,  name: 'Essência Adalya Love 66 50g',                   price: 15.90,  category: 'essencias',     art: 'essencia',   tint: '#F0DCC6', a: '#825B3E', b: '#662626',
+    desc: 'Blend frutado da Adalya com notas cítricas e refrescantes. Fumaça abundante e aroma envolvente, um dos sabores mais pedidos.' },
+  { id: 8,  name: 'Essência Zomo Strong Mint 50g',                 price: 13.90,  category: 'essencias',     art: 'essencia',   tint: '#E4DFD0', a: '#5D5B4C', b: '#825B3E',
+    desc: 'Menta forte e gelada da linha Strong da Zomo. Intensidade elevada para quem gosta de um sabor marcante e refrescante.' },
+  { id: 9,  name: 'Seda OCB Organic Slim King Size',               price: 9.50,   category: 'sedas',         art: 'seda',       tint: '#EBD8D0', a: '#662626', b: '#5D5B4C',
+    desc: 'Seda de cânhamo orgânico OCB, sem alvejantes e ultrafina. Queima natural e sabor puro, para uma experiência mais ecológica.' },
+  { id: 10, name: 'Pod Descartável Oxbar G8000 (Grape Ice)',       price: 119.90, category: 'vaporizadores', art: 'pod',        tint: '#E9DECE', a: '#825B3E', b: '#662626',
+    desc: 'Descartável Oxbar com até 8000 puffs e sabor uva gelada. Tela indicadora de bateria e nível de líquido, recarregável via USB-C.' },
+  { id: 11, name: 'Piteira de Vidro Mahal Glass Cristal',          price: 25.00,  category: 'acessorios',    art: 'piteira',    tint: '#EAD9CF', a: '#825B3E', b: '#662626',
+    desc: 'Piteira de vidro borossilicato reutilizável que filtra melhor e realça o sabor. Fácil de limpar, resistente e ecológica.' },
+  { id: 12, name: 'Seda Bem Bolado Celulose Transparente',         price: 10.00,  category: 'sedas',         art: 'seda',       tint: '#E4DFD0', a: '#5D5B4C', b: '#662626',
+    desc: 'Seda de celulose transparente, praticamente sem cinzas e com sabor neutro. Queima lenta e limpa, do início ao fim.' },
 ];
 
 const CATEGORY_ICONS = {
@@ -125,6 +137,7 @@ const state = {
   view: 'home',                                   // home | categories | cart | about
   filter: 'todos',
   query: '',                                      // texto da busca na Home
+  sheetProduct: null,                             // id do produto aberto no detalhe
   cart: new Map(),                                // productId -> quantidade
 };
 
@@ -251,12 +264,17 @@ function cardActionHTML(product) {
     </button>`;
 }
 
-/* Atualiza somente a área de ação de um card, sem re-renderizar a vitrine */
+/* Atualiza a área de ação de um produto (card na vitrine e, se aberto, o detalhe) */
 function updateCardAction(productId) {
-  const holder = $(`[data-action-for="${productId}"]`);
-  if (holder) {
-    const product = PRODUCTS.find((p) => p.id === productId);
+  const product = PRODUCTS.find((p) => p.id === productId);
+
+  $$(`[data-action-for="${productId}"]`).forEach((holder) => {
     holder.innerHTML = cardActionHTML(product);
+  });
+
+  if (state.sheetProduct === productId) {
+    const sheetAction = $('#sheet-action');
+    if (sheetAction) sheetAction.innerHTML = sheetActionHTML(product);
   }
 }
 
@@ -284,15 +302,18 @@ function renderProducts() {
       (p, i) => `
       <article class="product-card bg-white/70 rounded-2xl border border-mahal-accent/15 overflow-hidden
                       flex flex-col shadow-sm" style="animation-delay:${i * 45}ms">
-        <div class="aspect-square p-6" style="background:${p.tint}">
-          ${ART[p.art](p.a, p.b)}
-        </div>
-        <div class="flex flex-col flex-1 p-3.5 pt-3">
-          <h3 class="text-[0.82rem] font-bold text-mahal-text leading-snug min-h-[2.5rem]">${p.name}</h3>
-          <p class="font-display text-lg font-bold text-mahal-accent mt-1.5 mb-3">${formatBRL(p.price)}</p>
-          <div data-action-for="${p.id}" class="mt-auto">
-            ${cardActionHTML(p)}
+        <div data-detail="${p.id}" class="cursor-pointer">
+          <div class="aspect-square p-6" style="background:${p.tint}">
+            ${ART[p.art](p.a, p.b)}
           </div>
+          <div class="px-3.5 pt-3">
+            <h3 class="text-[0.82rem] font-bold text-mahal-text leading-snug min-h-[2.5rem]">${p.name}</h3>
+            <p class="text-[0.72rem] text-mahal-text/70 leading-snug line-clamp-2 min-h-[2rem] mt-1">${p.desc}</p>
+            <p class="font-display text-lg font-bold text-mahal-accent mt-1.5">${formatBRL(p.price)}</p>
+          </div>
+        </div>
+        <div data-action-for="${p.id}" class="px-3.5 pb-3.5 pt-2.5 mt-auto">
+          ${cardActionHTML(p)}
         </div>
       </article>`
     )
@@ -505,6 +526,83 @@ function checkout() {
 }
 
 /* --------------------------------------------------------------------------
+   DETALHE DO PRODUTO (bottom sheet)
+   -------------------------------------------------------------------------- */
+function sheetActionHTML(product) {
+  const qty = state.cart.get(product.id) || 0;
+
+  if (qty > 0) {
+    return `
+      <div class="flex items-center justify-between h-12 rounded-full bg-mahal-primary text-mahal-cream overflow-hidden shadow-lg shadow-mahal-primary/25">
+        <button data-dec="${product.id}" aria-label="Diminuir quantidade"
+                class="w-14 h-full flex items-center justify-center transition-all duration-300 hover:bg-mahal-deep active:scale-90">
+          <svg viewBox="0 0 24 24" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14"/></svg>
+        </button>
+        <span class="text-[0.95rem] font-extrabold tracking-wide select-none">${qty} no carrinho</span>
+        <button data-inc="${product.id}" aria-label="Aumentar quantidade"
+                class="w-14 h-full flex items-center justify-center transition-all duration-300 hover:bg-mahal-deep active:scale-90">
+          <svg viewBox="0 0 24 24" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+        </button>
+      </div>`;
+  }
+
+  return `
+    <button data-add="${product.id}"
+            class="w-full h-12 flex items-center justify-center rounded-full bg-mahal-primary text-mahal-cream
+                   font-bold text-[0.95rem] tracking-wide transition-all duration-300
+                   hover:bg-mahal-deep active:scale-[0.97] shadow-lg shadow-mahal-primary/25">
+      Adicionar ao carrinho
+    </button>`;
+}
+
+function openSheet(productId) {
+  const p = PRODUCTS.find((prod) => prod.id === productId);
+  if (!p) return;
+  state.sheetProduct = productId;
+
+  const catLabel = CATEGORIES.find((c) => c.id === p.category).label;
+
+  $('#sheet').innerHTML = `
+    <div class="sticky top-0 z-10 bg-mahal-cream/95 backdrop-blur-sm px-5 pt-3 pb-2 flex items-center">
+      <span class="mx-auto w-10 h-1.5 rounded-full bg-mahal-accent/30"></span>
+      <button id="sheet-close" aria-label="Fechar"
+              class="absolute right-3 top-2 w-9 h-9 flex items-center justify-center rounded-full text-mahal-text/70
+                     transition-all duration-300 hover:bg-mahal-tint active:scale-90">
+        <svg viewBox="0 0 24 24" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M18 6 6 18M6 6l12 12"/>
+        </svg>
+      </button>
+    </div>
+
+    <div class="px-5 pb-[calc(1.5rem+env(safe-area-inset-bottom))] pt-1">
+      <div class="aspect-[5/3] rounded-2xl flex items-center justify-center p-8" style="background:${p.tint}">
+        <div class="w-40 h-40">${ART[p.art](p.a, p.b)}</div>
+      </div>
+
+      <p class="text-[0.68rem] font-bold uppercase tracking-[0.18em] text-mahal-accent mt-5">${catLabel}</p>
+      <h3 class="font-display text-[1.35rem] font-semibold text-mahal-primary leading-snug mt-1">${p.name}</h3>
+      <p class="font-display text-[1.7rem] font-bold text-mahal-accent mt-2">${formatBRL(p.price)}</p>
+
+      <div class="h-px bg-mahal-accent/15 my-4"></div>
+
+      <p class="text-[0.7rem] font-bold uppercase tracking-wider text-mahal-primary mb-2">Descrição</p>
+      <p class="text-[0.92rem] text-mahal-text leading-relaxed">${p.desc}</p>
+
+      <div id="sheet-action" class="mt-7">${sheetActionHTML(p)}</div>
+    </div>`;
+
+  $('#sheet').scrollTo({ top: 0 });
+  $('#sheet-overlay').classList.add('is-visible');
+  $('#sheet').classList.add('is-open');
+}
+
+function closeSheet() {
+  $('#sheet-overlay').classList.remove('is-visible');
+  $('#sheet').classList.remove('is-open');
+  state.sheetProduct = null;
+}
+
+/* --------------------------------------------------------------------------
    EVENTOS (delegação global)
    -------------------------------------------------------------------------- */
 document.addEventListener('click', (event) => {
@@ -532,6 +630,12 @@ document.addEventListener('click', (event) => {
   const remove = event.target.closest('[data-remove]');
   if (remove) return removeFromCart(Number(remove.dataset.remove));
 
+  if (event.target.closest('#sheet-close')) return closeSheet();
+  if (event.target.id === 'sheet-overlay') return closeSheet();
+
+  const detail = event.target.closest('[data-detail]');
+  if (detail) return openSheet(Number(detail.dataset.detail));
+
   if (event.target.closest('#clear-cart')) return clearCart();
 
   if (event.target.closest('#checkout-btn')) return checkout();
@@ -546,6 +650,11 @@ document.addEventListener('click', (event) => {
 $('#search').addEventListener('input', (event) => {
   state.query = event.target.value;
   renderProducts();
+});
+
+/* Fecha o detalhe do produto com a tecla Esc */
+document.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape' && state.sheetProduct !== null) closeSheet();
 });
 
 /* --------------------------------------------------------------------------
