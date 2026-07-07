@@ -8,7 +8,7 @@ O app da **Mahal Tabacaria** é a solução perfeita para modernizar o atendimen
 
 ---
 
-## ✨ Diferenciais & Funcionalidades Premium
+## Diferenciais & Funcionalidades Premium
 
 *   **Experiência de Aplicativo Nativo:** Layout otimizado para celulares, com suporte a gestos e transições de tela ultra suaves.
 *   **Carrinho Inteligente & Persistente:** Salvar os itens do usuário mesmo se ele fechar a aba ou recarregar a página.
