@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#662626" />
+  <title>Mahal Tabacaria — Loja</title>
+
+  <!-- Tipografia -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            mahal: {
+              primary: '#662626',
+              accent:  '#825B3E',
+              text:    '#5D5B4C',
+              cream:   '#FFEBDB',
+              tint:    '#F7DFCC',
+              deep:    '#4A1B1B',
+            },
+          },
+          fontFamily: {
+            display: ['"Playfair Display"', 'serif'],
+            sans: ['Manrope', 'system-ui', 'sans-serif'],
+          },
+          maxWidth: { phone: '420px' },
+        },
+      },
+    };
+  </script>
+
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="icon" type="image/png" href="images/mahal_new_logo-removed-bg.png" />
+</head>
+
+<body class="font-sans antialiased bg-mahal-deep md:flex md:items-center md:justify-center md:min-h-screen backdrop-pattern">
+
+  <!-- ============ MOLDURA MOBILE (viewport de smartphone) ============ -->
+  <div id="phone" class="relative w-full max-w-phone mx-auto bg-mahal-cream overflow-hidden
+                         h-[100dvh] md:h-[min(880px,94vh)] md:rounded-[2.25rem] md:shadow-2xl md:ring-8 md:ring-black/40">
+
+    <!-- Área rolável -->
+    <main id="screen" class="h-full overflow-y-auto overscroll-contain scroll-smooth pb-32">
+
+      <!-- ============ CABEÇALHO FIXO ============ -->
+      <header class="sticky top-0 z-30 bg-mahal-primary text-mahal-cream shadow-lg shadow-mahal-primary/20">
+        <div class="flex items-center justify-between px-5 pt-[calc(0.875rem+env(safe-area-inset-top))] pb-3.5">
+          <div class="flex items-center gap-3">
+            <img src="images/mahal_new_logo-removed-bg.png" alt="Logo Mahal Tabacaria"
+                 class="h-11 w-11 object-contain drop-shadow" />
+            <div class="leading-none">
+              <h1 class="font-display font-semibold text-[1.35rem] tracking-wide">Mahal Tabacaria</h1>
+              <p class="text-[0.68rem] tracking-[0.28em] uppercase text-mahal-cream/70 mt-1">Premium Smoke Shop</p>
+            </div>
+          </div>
+
+          <button data-goto="cart" aria-label="Abrir carrinho"
+                  class="relative p-2.5 -mr-1.5 rounded-full transition-all duration-300 hover:bg-white/10 active:scale-90">
+            <svg viewBox="0 0 24 24" class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M6 7h12l1.2 12.2a1.5 1.5 0 0 1-1.5 1.8H6.3a1.5 1.5 0 0 1-1.5-1.8L6 7Z"/>
+              <path d="M9 10V6a3 3 0 0 1 6 0v4"/>
+            </svg>
+            <span data-badge class="cart-badge absolute top-0.5 right-0 min-w-[1.15rem] h-[1.15rem] px-1 rounded-full
+                                    bg-mahal-accent text-white text-[0.66rem] font-bold
+                                    flex items-center justify-center transition-all duration-300 scale-0">0</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- ============ VIEW: INÍCIO ============ -->
+      <section id="view-home" data-view class="view">
+
+        <!-- Busca + Barra de categorias rolável -->
+        <div class="sticky top-[calc(4.6rem+env(safe-area-inset-top))] z-20 bg-mahal-cream/95 backdrop-blur-sm border-b border-mahal-accent/10">
+          <div class="px-5 pt-3.5 pb-1">
+            <div class="relative">
+              <svg viewBox="0 0 24 24" class="w-[1.15rem] h-[1.15rem] text-mahal-text/50 absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none"
+                   fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="7"/><path d="m20 20-3.2-3.2"/>
+              </svg>
+              <input id="search" type="search" inputmode="search" autocomplete="off" aria-label="Buscar produtos"
+                     placeholder="Buscar produtos..."
+                     class="w-full rounded-full border border-mahal-accent/25 bg-white/70 pl-11 pr-4 py-2.5
+                            text-sm text-mahal-text placeholder:text-mahal-text/50
+                            focus:outline-none focus:border-mahal-primary focus:ring-2 focus:ring-mahal-primary/15
+                            transition-all duration-300" />
+            </div>
+          </div>
+          <div id="chip-bar" class="flex gap-2.5 overflow-x-auto no-scrollbar px-5 pt-2 pb-3.5"></div>
+        </div>
+
+        <!-- Vitrine -->
+        <div class="px-5 pt-6">
+          <div class="flex items-end justify-between mb-5">
+            <div>
+              <h2 id="home-title" class="font-display text-2xl font-semibold text-mahal-primary">Nossa Seleção</h2>
+              <p id="home-count" class="text-sm text-mahal-text mt-1"></p>
+            </div>
+          </div>
+
+          <div id="product-grid" class="grid grid-cols-2 gap-4"></div>
+
+          <p class="text-center text-[0.7rem] text-mahal-text/60 tracking-wide mt-10 leading-relaxed">
+            Proibida a venda para menores de 18 anos.<br/>Aprecie com moderação.
+          </p>
+        </div>
+      </section>
+
+      <!-- ============ VIEW: CATEGORIAS ============ -->
+      <section id="view-categories" data-view class="view hidden">
+        <div class="px-5 pt-7">
+          <h2 class="font-display text-2xl font-semibold text-mahal-primary">Categorias</h2>
+          <p class="text-sm text-mahal-text mt-1 mb-6">Navegue pelo nosso catálogo completo</p>
+          <div id="category-list" class="flex flex-col gap-3.5"></div>
+        </div>
+      </section>
+
+      <!-- ============ VIEW: CARRINHO ============ -->
+      <section id="view-cart" data-view class="view hidden">
+        <div class="px-5 pt-7">
+          <div class="flex items-start justify-between gap-3">
+            <div>
+              <h2 class="font-display text-2xl font-semibold text-mahal-primary">Seu Carrinho</h2>
+              <p id="cart-subtitle" class="text-sm text-mahal-text mt-1 mb-6"></p>
+            </div>
+            <button id="clear-cart" type="button"
+                    class="hidden shrink-0 mt-1.5 flex items-center gap-1.5 text-[0.78rem] font-semibold text-mahal-text/70
+                           px-3 py-1.5 rounded-full transition-all duration-300 hover:text-mahal-primary hover:bg-mahal-tint active:scale-90">
+              <svg viewBox="0 0 24 24" class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 7h16"/><path d="M9 7V5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/>
+                <path d="M6.5 7l.8 12a2 2 0 0 0 2 1.9h5.4a2 2 0 0 0 2-1.9l.8-12"/>
+              </svg>
+              Limpar
+            </button>
+          </div>
+
+          <div id="cart-items" class="flex flex-col gap-3"></div>
+
+          <!-- Estado vazio -->
+          <div id="cart-empty" class="hidden flex-col items-center text-center pt-14 pb-8">
+            <svg viewBox="0 0 96 96" class="w-24 h-24 mb-6" fill="none">
+              <circle cx="48" cy="48" r="44" fill="#F7DFCC"/>
+              <path d="M30 34h36l3.4 34.6a4 4 0 0 1-4 4.4H30.6a4 4 0 0 1-4-4.4L30 34Z" stroke="#825B3E" stroke-width="2.6" stroke-linejoin="round"/>
+              <path d="M39 41V30a9 9 0 0 1 18 0v11" stroke="#662626" stroke-width="2.6" stroke-linecap="round"/>
+            </svg>
+            <h3 class="font-display text-xl font-semibold text-mahal-primary mb-1.5">Carrinho vazio</h3>
+            <p class="text-sm text-mahal-text max-w-[15rem] leading-relaxed mb-7">Explore nossa seleção premium e adicione seus produtos favoritos.</p>
+            <button data-goto="home"
+                    class="px-8 py-3.5 rounded-full bg-mahal-primary text-mahal-cream font-semibold text-sm tracking-wide
+                           transition-all duration-300 hover:bg-mahal-deep active:scale-95 shadow-lg shadow-mahal-primary/25">
+              Ver produtos
+            </button>
+          </div>
+
+          <!-- Resumo financeiro -->
+          <div id="cart-summary" class="hidden mt-6">
+            <div class="bg-white/60 rounded-2xl border border-mahal-accent/15 px-5 py-5">
+              <div class="flex justify-between text-sm text-mahal-text mb-2.5">
+                <span>Subtotal</span>
+                <span id="cart-subtotal" class="font-semibold text-mahal-text"></span>
+              </div>
+              <div class="flex justify-between text-sm text-mahal-text pb-3.5 border-b border-dashed border-mahal-accent/25">
+                <span>Entrega</span>
+                <span class="italic">A combinar</span>
+              </div>
+              <div class="flex justify-between items-baseline pt-3.5">
+                <span class="font-semibold text-mahal-primary">Total</span>
+                <span id="cart-total" class="font-display text-[1.6rem] font-bold text-mahal-primary"></span>
+              </div>
+            </div>
+
+            <button id="checkout-btn"
+                    class="w-full mt-5 flex items-center justify-center gap-2.5 px-6 py-4 rounded-full
+                           bg-mahal-primary text-mahal-cream font-bold text-[0.95rem] tracking-wide
+                           transition-all duration-300 hover:bg-mahal-deep active:scale-[0.97]
+                           shadow-xl shadow-mahal-primary/30">
+              <svg viewBox="0 0 24 24" class="w-5 h-5" fill="currentColor">
+                <path d="M12.04 2a9.9 9.9 0 0 0-8.5 15L2 22l5.14-1.5A9.93 9.93 0 1 0 12.04 2Zm0 18.1a8.1 8.1 0 0 1-4.13-1.13l-.3-.18-3.05.9.9-2.98-.2-.3a8.14 8.14 0 1 1 6.78 3.68Zm4.45-6.08c-.24-.12-1.44-.71-1.66-.79-.22-.08-.39-.12-.55.12-.16.24-.63.79-.77.95-.14.16-.28.18-.53.06a6.66 6.66 0 0 1-3.33-2.91c-.25-.43.25-.4.72-1.34.08-.16.04-.3-.02-.42-.06-.12-.55-1.32-.75-1.81-.2-.48-.4-.41-.55-.42h-.47c-.16 0-.43.06-.65.3-.22.24-.85.83-.85 2.03s.87 2.36 1 2.52c.12.16 1.72 2.62 4.16 3.68.58.25 1.03.4 1.39.51.58.19 1.11.16 1.53.1.47-.07 1.44-.59 1.64-1.16.2-.57.2-1.06.14-1.16-.06-.1-.22-.16-.46-.28Z"/>
+              </svg>
+              Finalizar Pedido via WhatsApp
+            </button>
+
+            <p class="text-center text-xs text-mahal-text/70 mt-4 leading-relaxed">
+              Você será direcionado ao nosso atendimento para<br/>combinar entrega e pagamento via Pix.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ VIEW: SOBRE / PERFIL ============ -->
+      <section id="view-about" data-view class="view hidden">
+        <div class="px-5 pt-9 pb-4 flex flex-col items-center text-center">
+          <div class="w-40 h-40 rounded-full bg-mahal-tint flex items-center justify-center shadow-inner mb-6">
+            <img src="images/mahal_new_logo-removed-bg.png" alt="Logo Mahal Tabacaria" class="w-32 h-32 object-contain drop-shadow-md" />
+          </div>
+          <h2 class="font-display text-[1.7rem] font-semibold text-mahal-primary">Mahal Tabacaria</h2>
+          <p class="text-sm text-mahal-text leading-relaxed max-w-[19rem] mt-3">
+            Uma curadoria refinada de essências, sedas, vaporizadores e acessórios premium.
+            Atendimento próximo, produtos originais e a experiência que você merece.
+          </p>
+        </div>
+
+        <div class="px-5 flex flex-col gap-3.5 mt-2">
+          <a href="https://www.google.com/maps/search/?api=1&query=R.%20Dr.%20Jos%C3%A9%20Barbosa%20de%20Barros%2C%201551%2C%20Jardim%20Para%C3%ADso%2C%20Botucatu"
+             target="_blank" rel="noopener"
+             class="group bg-white/60 rounded-2xl border border-mahal-accent/15 px-5 py-4 flex items-center gap-4
+                    transition-all duration-300 hover:border-mahal-accent/40 active:scale-[0.98]">
+            <span class="w-11 h-11 rounded-full bg-mahal-tint flex items-center justify-center shrink-0">
+              <svg viewBox="0 0 24 24" class="w-5 h-5 text-mahal-primary" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 21s7-5.1 7-11a7 7 0 1 0-14 0c0 5.9 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/>
+              </svg>
+            </span>
+            <div class="text-left flex-1 min-w-0">
+              <p class="text-[0.8rem] font-bold text-mahal-primary uppercase tracking-wider">Endereço</p>
+              <p class="text-sm text-mahal-text mt-0.5 leading-snug">R. Dr. José Barbosa de Barros, 1551 — Jardim Paraíso, Botucatu</p>
+              <p class="text-[0.72rem] font-semibold text-mahal-accent mt-1.5">Toque para abrir no mapa</p>
+            </div>
+            <svg viewBox="0 0 24 24" class="w-5 h-5 text-mahal-accent shrink-0 transition-transform duration-300 group-hover:translate-x-0.5"
+                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="m9 6 6 6-6 6"/>
+            </svg>
+          </a>
+
+          <div class="bg-white/60 rounded-2xl border border-mahal-accent/15 px-5 py-4 flex items-center gap-4">
+            <span class="w-11 h-11 rounded-full bg-mahal-tint flex items-center justify-center shrink-0">
+              <svg viewBox="0 0 24 24" class="w-5 h-5 text-mahal-primary" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.2 1.8"/>
+              </svg>
+            </span>
+            <div class="text-left">
+              <p class="text-[0.8rem] font-bold text-mahal-primary uppercase tracking-wider">Horário</p>
+              <p class="text-sm text-mahal-text mt-0.5">Seg a Sáb — 15h às 00h</p>
+            </div>
+          </div>
+
+          <button id="about-whatsapp"
+                  class="w-full mt-2 flex items-center justify-center gap-2.5 px-6 py-4 rounded-full
+                         border-2 border-mahal-primary text-mahal-primary font-bold text-[0.95rem] tracking-wide
+                         transition-all duration-300 hover:bg-mahal-primary hover:text-mahal-cream active:scale-[0.97]">
+            <svg viewBox="0 0 24 24" class="w-5 h-5" fill="currentColor">
+              <path d="M12.04 2a9.9 9.9 0 0 0-8.5 15L2 22l5.14-1.5A9.93 9.93 0 1 0 12.04 2Zm0 18.1a8.1 8.1 0 0 1-4.13-1.13l-.3-.18-3.05.9.9-2.98-.2-.3a8.14 8.14 0 1 1 6.78 3.68Zm4.45-6.08c-.24-.12-1.44-.71-1.66-.79-.22-.08-.39-.12-.55.12-.16.24-.63.79-.77.95-.14.16-.28.18-.53.06a6.66 6.66 0 0 1-3.33-2.91c-.25-.43.25-.4.72-1.34.08-.16.04-.3-.02-.42-.06-.12-.55-1.32-.75-1.81-.2-.48-.4-.41-.55-.42h-.47c-.16 0-.43.06-.65.3-.22.24-.85.83-.85 2.03s.87 2.36 1 2.52c.12.16 1.72 2.62 4.16 3.68.58.25 1.03.4 1.39.51.58.19 1.11.16 1.53.1.47-.07 1.44-.59 1.64-1.16.2-.57.2-1.06.14-1.16-.06-.1-.22-.16-.46-.28Z"/>
+            </svg>
+            Falar com a Mahal
+          </button>
+
+          <p class="text-center text-[0.7rem] text-mahal-text/60 tracking-wide mt-4 mb-2 leading-relaxed">
+            Proibida a venda para menores de 18 anos.<br/>Aprecie com moderação.
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <!-- ============ TOAST NOTIFICATION ============ -->
+    <div id="toast" class="toast absolute left-1/2 bottom-[calc(5.9rem+env(safe-area-inset-bottom))] z-50
+                           flex items-center gap-2.5 px-5 py-3.5 rounded-full
+                           bg-mahal-deep text-mahal-cream text-sm font-semibold shadow-2xl whitespace-nowrap">
+      <svg viewBox="0 0 24 24" class="w-5 h-5 text-mahal-cream shrink-0" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20 6 9 17l-5-5"/>
+      </svg>
+      <span id="toast-msg">Item adicionado ao carrinho com sucesso!</span>
+    </div>
+
+    <!-- ============ BOTTOM NAVIGATION BAR ============ -->
+    <nav class="absolute bottom-0 inset-x-0 z-40 bg-mahal-primary
+                pb-[env(safe-area-inset-bottom)] shadow-[0_-8px_28px_rgba(74,27,27,0.28)]">
+      <div class="grid grid-cols-4">
+
+        <button data-goto="home" class="nav-btn" aria-label="Início">
+          <svg viewBox="0 0 24 24" class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 10.5 12 3l9 7.5"/><path d="M5.5 9.5V20a1 1 0 0 0 1 1H10v-6h4v6h3.5a1 1 0 0 0 1-1V9.5"/>
+          </svg>
+          <span>Início</span>
+        </button>
+
+        <button data-goto="categories" class="nav-btn" aria-label="Categorias">
+          <svg viewBox="0 0 24 24" class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3.5" y="3.5" width="7" height="7" rx="1.6"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.6"/>
+            <rect x="3.5" y="13.5" width="7" height="7" rx="1.6"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.6"/>
+          </svg>
+          <span>Categorias</span>
+        </button>
+
+        <button data-goto="cart" class="nav-btn relative" aria-label="Carrinho">
+          <span class="relative">
+            <svg viewBox="0 0 24 24" class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M6 7h12l1.2 12.2a1.5 1.5 0 0 1-1.5 1.8H6.3a1.5 1.5 0 0 1-1.5-1.8L6 7Z"/>
+              <path d="M9 10V6a3 3 0 0 1 6 0v4"/>
+            </svg>
+            <span data-badge class="cart-badge absolute -top-1.5 -right-2.5 min-w-[1.05rem] h-[1.05rem] px-1 rounded-full
+                                    bg-mahal-accent text-white text-[0.62rem] font-bold
+                                    flex items-center justify-center transition-all duration-300 scale-0">0</span>
+          </span>
+          <span>Carrinho</span>
+        </button>
+
+        <button data-goto="about" class="nav-btn" aria-label="Sobre">
+          <svg viewBox="0 0 24 24" class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="8.2" r="3.4"/><path d="M5 20c.9-3.6 3.7-5.4 7-5.4s6.1 1.8 7 5.4"/>
+          </svg>
+          <span>Sobre</span>
+        </button>
+
+      </div>
+    </nav>
+  </div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
