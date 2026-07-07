@@ -519,10 +519,17 @@ function buildWhatsAppMessage() {
   ].join('\n');
 }
 
+function openWhatsApp(text) {
+  const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
+  // Navegação direta (não window.open): evita bloqueio de pop-up em navegadores
+  // móveis e webviews (Instagram/Facebook/WhatsApp in-app), que costumam
+  // silenciar window.open(..., '_blank') sem qualquer aviso ao usuário.
+  window.location.href = url;
+}
+
 function checkout() {
   if (state.cart.size === 0) return;
-  const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(buildWhatsAppMessage())}`;
-  window.open(url, '_blank', 'noopener');
+  openWhatsApp(buildWhatsAppMessage());
 }
 
 /* --------------------------------------------------------------------------
@@ -641,8 +648,7 @@ document.addEventListener('click', (event) => {
   if (event.target.closest('#checkout-btn')) return checkout();
 
   if (event.target.closest('#about-whatsapp')) {
-    const greeting = encodeURIComponent('Olá! Vim pelo app da *Mahal Tabacaria* e gostaria de um atendimento.');
-    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${greeting}`, '_blank', 'noopener');
+    return openWhatsApp('Olá! Vim pelo app da *Mahal Tabacaria* e gostaria de um atendimento.');
   }
 });
 
