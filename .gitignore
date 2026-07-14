@@ -1,0 +1,4 @@
+# Ignore nested repositories
+/mahal-commerce-ui-market/
+/mahal-commerce-ui/
+/mahal-commerce/
