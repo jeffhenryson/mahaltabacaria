@@ -1,0 +1,156 @@
+version: "3.9"
+
+services:
+  postgres-mahal:
+    image: postgres:16-alpine
+    container_name: postgres-mahal
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: security
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5435:5432"
+    volumes:
+      - pgdata_mahal:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d security"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    networks:
+      - mahal-network
+
+  redis-mahal:
+    image: redis:7-alpine
+    container_name: redis-mahal
+    restart: unless-stopped
+    command: redis-server --requirepass hml_redis_2026
+    ports:
+      - "6382:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "-a", "hml_redis_2026", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+    networks:
+      - mahal-network
+
+  prometheus-mahal:
+    image: prom/prometheus:v2.52.0
+    container_name: prometheus-mahal
+    restart: unless-stopped
+    ports:
+      - "9092:9090"
+    volumes:
+      - ./mahal-commerce/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheusdata_mahal:/prometheus
+    command:
+      - "--config.file=/etc/prometheus/prometheus.yml"
+      - "--storage.tsdb.path=/prometheus"
+      - "--storage.tsdb.retention.time=7d"
+    depends_on:
+      - mahal-backend
+    networks:
+      - mahal-network
+
+  grafana-mahal:
+    image: grafana/grafana:11.0.0
+    container_name: grafana-mahal
+    restart: unless-stopped
+    ports:
+      - "3002:3000"
+    environment:
+      GF_AUTH_ANONYMOUS_ENABLED: "true"
+      GF_AUTH_ANONYMOUS_ORG_ROLE: "Viewer"
+      GF_SECURITY_ALLOW_EMBEDDING: "true"
+      GF_USERS_DEFAULT_THEME: "dark"
+      GF_SERVER_ROOT_URL: "http://localhost:3002"
+      GF_UNIFIED_ALERTING_ENABLED: "true"
+      GF_ALERTING_ENABLED: "false"
+    volumes:
+      - grafanadata_mahal:/var/lib/grafana
+      - ./mahal-commerce/grafana/provisioning:/etc/grafana/provisioning:ro
+    depends_on:
+      - prometheus-mahal
+    networks:
+      - mahal-network
+
+  mahal-backend:
+    build:
+      context: ./mahal-commerce
+      dockerfile: Dockerfile
+    container_name: mahal-backend
+    restart: unless-stopped
+    depends_on:
+      postgres-mahal:
+        condition: service_healthy
+      redis-mahal:
+        condition: service_healthy
+    environment:
+      SPRING_PROFILES_ACTIVE: hml
+      DB_URL: jdbc:postgresql://postgres-mahal:5432/security
+      DB_USERNAME: postgres
+      DB_PASSWORD: postgres
+      REDIS_HOST: redis-mahal
+      REDIS_PORT: 6379
+      REDIS_PASSWORD: hml_redis_2026
+      JWT_SECRET: WsYV6lC353xcMmE/C6buo96jGsm4JQMf4EyV3KZzJlk=
+      TOTP_ENCRYPTION_KEY: IFFvdSZ3K5jEyYAOLGSfWLriOSGBvgpEYGrj24jLTUw=
+      JWT_ISSUER: security-spring-hml
+      JWT_AUDIENCE: security-spring-api
+      CORS_ALLOWED_ORIGINS: http://localhost:4200,http://localhost:4201,http://localhost:4300
+      RESEND_API_KEY: re_cc831ztx_AyBLXdqXoogo2spffzTLHtar
+      RESEND_FROM: noreply@cernedsgn.xyz
+      GOOGLE_CLIENT_ID: 272358372118-v3nf24o331kfpg0n3gqm0497o1fd9faf.apps.googleusercontent.com
+      DEV_EMAIL: dev@system.internal
+      DEV_PASSWORD: Dev@secure1!
+    ports:
+      - "8082:8082"
+      - "8083:8081"
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://localhost:8081/actuator/health | grep -q UP || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 40s
+    networks:
+      - mahal-network
+
+  mahal-admin-ui:
+    build:
+      context: ./mahal-commerce-ui
+      dockerfile: Dockerfile
+    container_name: mahal-admin-ui
+    restart: unless-stopped
+    ports:
+      - "4201:80"
+    depends_on:
+      - mahal-backend
+    networks:
+      - mahal-network
+
+  mahal-market-ui:
+    build:
+      context: ./mahal-commerce-ui-market
+      dockerfile: Dockerfile
+    container_name: mahal-market-ui
+    restart: unless-stopped
+    ports:
+      - "4300:4000"
+    environment:
+      PORT: "4000"
+    depends_on:
+      - mahal-backend
+    networks:
+      - mahal-network
+
+networks:
+  mahal-network:
+    name: mahal-network
+    driver: bridge
+
+volumes:
+  pgdata_mahal:
+  prometheusdata_mahal:
+  grafanadata_mahal:
